@@ -1,0 +1,127 @@
+# 1. Version control
+.git/
+.gitignore
+.gitattributes
+.hg/
+.svn/
+
+# 2. Node.js and TypeScript
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# 3. Build outputs
+build/
+dist/
+out/
+coverage/
+
+# 4. Test and development artifacts
+test/
+tests/
+__tests__/
+__mocks__/
+__snapshots__/
+*.spec.ts
+*.spec.tsx
+*.test.ts
+*.test.tsx
+*.test.js
+*.test.jsx
+*.snap
+
+# 5. IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime*
+
+# 6. Python cache (in case of scripts)
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+
+# 7. Go (in case of scripts)
+/vendor/
+*.test
+.go-cache/
+
+# 8. Java (in case of scripts)
+target/
+*.class
+.gradle/
+
+# 9. Environment and secrets
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.cert
+*.csr
+
+# 10. Local/temporary files
+.local/
+local/
+tmp/
+temp/
+*.tmp
+.DS_Store
+Thumbs.db
+
+# 11. Documentation and meta
+README*
+*.md
+docs/
+CONTRIBUTING.md
+LICENSE
+
+# 12. Docker and Compose files
+Dockerfile*
+docker-compose*
+
+# 13. Project-specific and misc
+.cursor/
+.cursorignore
+.devcontainer/
+.husky/
+.oxlintrc.json
+.prettierignore
+.prettierrc
+
+# 14. Asset caches and large binaries
+*.log
+*.bak
+*.old
+*.orig
+*.swp
+*.swo
+
+# 15. Ignore lock files (but DO NOT add them to .dockerignore as per instructions)
+# (Intentionally omitted: *.lock, package-lock.json, yarn.lock, pnpm-lock.yaml)
+
+# 16. Ignore scripts and tools not needed in container
+scripts/
+tools/
+
+# 17. Ignore e2e and test data
+e2e-tests/
+
+# 18. Ignore snapshots and backups
+snapshots/
+
+# 19. Ignore database migrations and meta (if not needed)
+drizzle/meta/
+
+# 20. Ignore backup files
+*.bak
+
+# End of .dockerignore

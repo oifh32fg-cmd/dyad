@@ -1,0 +1,44 @@
+services:
+  typescript-scaffold:
+    build:
+      context: ./scaffold
+      dockerfile: ../scaffoldDockerfile
+    restart: unless-stopped
+    init: true
+    # env_file: ./.env  # Uncomment if .env file exists
+    ports:
+      - "3000:3000"  # Vite preview server
+    networks:
+      - appnet
+    # This is a frontend app; no persistent volumes required
+
+  javascript-worker:
+    build:
+      context: ./worker
+      dockerfile: ../workerDockerfile
+    restart: unless-stopped
+    init: true
+    # env_file: ./.env  # Uncomment if .env file exists
+    ports:
+      - "3001:3000"  # Expose worker's proxy server on 3001 (internal 3000)
+    networks:
+      - appnet
+    # No persistent volumes required
+
+  typescript-fake-llm-server:
+    build:
+      context: ./testing/fake-llm-server
+      dockerfile: ../../testing/fake-llm-serverDockerfile
+    restart: unless-stopped
+    init: true
+    # env_file: ./.env  # Uncomment if .env file exists
+    ports:
+      - "3500:3500"  # Fake LLM server API
+    networks:
+      - appnet
+    # No persistent volumes required
+
+networks:
+  appnet:
+    driver: bridge
+    # Shared network for inter-service communication

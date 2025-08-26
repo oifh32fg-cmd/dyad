@@ -1,29 +1,45 @@
-# Dyad
+## Running the Project with Docker
 
-Dyad is a local, open-source AI app builder. It's fast, private, and fully under your control — like Lovable, v0, or Bolt, but running right on your machine.
+This project provides Dockerfiles and a `docker-compose.yaml` for running all major services in isolated containers. Below are the key details and instructions for running the project using Docker Compose.
 
-[![Image](https://github.com/user-attachments/assets/f6c83dfc-6ffd-4d32-93dd-4b9c46d17790)](http://dyad.sh/)
+### Project-Specific Requirements
+- **Node.js Version:**
+  - `typescript-scaffold`: Node 22.14.0
+  - `javascript-worker` & `typescript-fake-llm-server`: Node 22.13.1
+- **Package Managers:**
+  - Uses `pnpm` (v10.4.1) for the scaffold frontend (enabled via Corepack)
+  - Uses `npm` for the worker and fake LLM server
 
-More info at: [http://dyad.sh/](http://dyad.sh/)
+### Environment Variables
+- The Docker Compose file references an optional `.env` file for environment variables. Uncomment the `env_file` lines in the compose file if you need to provide custom environment variables.
+- Example environment variables can be found in `./.env.example`.
 
-## 🚀 Features
+### Build and Run Instructions
+1. Ensure Docker and Docker Compose are installed.
+2. From the project root, run:
+   ```sh
+   docker compose up --build
+   ```
+   This will build and start all services defined in `docker-compose.yaml`.
 
-- ⚡️ **Local**: Fast, private and no lock-in.
-- 🛠 **Bring your own keys**: Use your own AI API keys — no vendor lock-in.
-- 🖥️ **Cross-platform**: Easy to run on Mac or Windows.
+### Service Details & Exposed Ports
+- **typescript-scaffold**
+  - Context: `./scaffold`
+  - Port: `3000` (Vite preview server)
+- **javascript-worker**
+  - Context: `./worker`
+  - Port: `3001` (maps to internal 3000)
+- **typescript-fake-llm-server**
+  - Context: `./testing/fake-llm-server`
+  - Port: `3500`
+- All services are connected via the `appnet` bridge network for inter-service communication.
 
-## 📦 Download
+### Special Configuration Notes
+- No persistent volumes are required for any service.
+- All services run as non-root users for improved security.
+- If you need to provide environment variables, copy `.env.example` to `.env` and uncomment the `env_file` lines in the compose file.
+- The worker service expects its command to be overridden if you need to pass custom `workerData`.
 
-No sign-up required. Just download and go.
+---
 
-### [👉 Download for your platform](https://www.dyad.sh/#download)
-
-## 🤝 Community
-
-Join our growing community of AI app builders on **Reddit**: [r/dyadbuilders](https://www.reddit.com/r/dyadbuilders/) - share your projects and get help from the community!
-
-## 🛠️ Contributing
-
-**Dyad** is open-source (Apache 2.0 licensed).
-
-If you're interested in contributing to dyad, please read our [contributing](./CONTRIBUTING.md) doc.
+*This section was updated to reflect the current Docker setup for the project. Please refer to the above for the most accurate instructions on running the project with Docker.*
